@@ -1,0 +1,9 @@
+**.vagrant
+.DS_Store
+site
+**/dummy-data-samples
+**/data
+**/.terraform
+**/registry
+**/*dummy-passwords.txt
+**/.tfstate*

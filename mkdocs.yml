@@ -1,0 +1,31 @@
+site_name: Elasticsearch and ELK Stack
+site_url: https://ggsood.github.io/elk-stack
+site_author: Gaurav Sood
+
+# Copyright
+copyright: 'Copyright &copy; 2020 Gaurav Sood'
+
+theme:
+  name: 'material'
+  features:
+    - tabs
+  # favicon: images/favicon.png
+
+
+# Plugins
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - codehilite
+
+# Page tree
+nav:
+  - Welcome: index.md
+  - Elasticsearch:
+    - You Know for Search: elasticsearch/YouKnowForSearch.md
+    - Basic Concepts: elasticsearch/Basic-Concepts.md
+    - Exloring Cluster: elasticsearch/Exploring-Cluster.md
+

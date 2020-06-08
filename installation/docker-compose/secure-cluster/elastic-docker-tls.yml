@@ -1,0 +1,100 @@
+version: '2.2'
+
+services:
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
+    container_name: es01
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/es01:/usr/share/elasticsearch/data
+      - ./data/certs:$CERTS_DIR
+      - ./config/es01.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+    healthcheck:
+      test: curl --cacert $CERTS_DIR/ca/ca.crt -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
+    container_name: es02
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/es02:/usr/share/elasticsearch/data
+      - ./data/certs:$CERTS_DIR
+      - ./config/es02.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - elastic
+
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${VERSION}
+    container_name: es03
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/es03:/usr/share/elasticsearch/data
+      - ./data/certs:$CERTS_DIR
+      - ./config/es03.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks:
+      - elastic
+  kib01:
+    image: docker.elastic.co/kibana/kibana:${VERSION}
+    container_name: kib01
+    depends_on: {"es01": {"condition": "service_healthy"}}
+    ports:
+      - 5601:5601
+    volumes:
+      - ./data/certs:$CERTS_DIR
+      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - elastic
+  
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:${VERSION}
+    container_name: logstash
+    #  depends_on: {"es01": {"condition": "service_healthy"}}
+    depends_on: [kib01]
+    ports:
+      - 5044:5044
+      - 5400:5400
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./config/logstash-pipeline:/usr/share/logstash/pipeline:ro
+    networks:
+      - elastic
+
+# this will provision volumes in the docker machine
+# volumes:
+#   data01:
+#     driver: local
+#   data02:
+#     driver: local
+#   data03:
+#     driver: local
+#   certs:
+#     driver: local
+
+networks:
+  elastic:
+    driver: bridge

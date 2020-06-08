@@ -1,0 +1,10 @@
+server.port: 5601
+server.host: "kib01"
+server.name: "kibana"
+elasticsearch.hosts: "https://es01:9200"
+elasticsearch.username: kibana
+elasticsearch.password: bnsWM1ROT4ntz3JMmDzC
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/elasticsearch/config/certificates/kib01/kib01.crt
+server.ssl.key: /usr/share/elasticsearch/config/certificates/kib01/kib01.key
+elasticsearch.ssl.certificateAuthorities: [ "/usr/share/elasticsearch/config/certificates/ca/ca.crt" ]

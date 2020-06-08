@@ -1,0 +1,31 @@
+filebeat.registry.path: /Users/gausood/Projects/github-repos/personal/github-website/elk-stack/examples/registry/filebeat
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /Users/gausood/Projects/github-repos/personal/github-website/elk-stack/examples/python/movies.json
+  json.keys_under_root: true
+  json.add_error_key: true
+
+setup.template.name: "movies-%{[agent.version]}"
+setup.template.pattern: "movies-%{[agent.version]}-*"
+
+# output.elasticsearch:
+#   hosts: ["localhost:9200"]
+#   ssl.certificate_authorities: ["/Users/gausood/Projects/github-repos/personal/monitoring-and-observability/elk-stack/src/ca.crt"]
+#   protocol: "https"
+#   username: gaurav
+#   password: gaurav
+#   # index: "test-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+# output.logstash:
+#   hosts: ["localhost:5044"]
+
+output.elasticsearch:
+  hosts:
+    - "https://b1458a65ce694b628f2bea4df0b50d08.eu-west-2.aws.cloud.es.io:9243"
+  username: gaurav
+  password: gaurav
+  index: "movies-%{[agent.version]}-%{+yyyy.MM.dd}"
+  

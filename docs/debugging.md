@@ -1,0 +1,1 @@
+https://discuss.elastic.co/t/i-lost-the-password-that-has-been-changed/91867/2
