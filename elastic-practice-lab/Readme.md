@@ -1,0 +1,45 @@
+## Elasticsearch training lab
+This is a simple lab environment for training and experimenting with Elasticsearch 7.8.0.
+
+It will build nodes running on CentOS, and provision them with the required system settings to run Elasticsearch on a non-local IP. It's a naive method of provisioning but it's suitable for our requirements.
+
+The lab is designed purely as a training tool.
+Steps will be described to provision this cluster as a production and secure cluster.
+
+### Dependencies
+These two archives are required:
+- [Elasticsearch 7.8.0](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.8.0-linux-x86_64.tar.gz)
+- [Kibana 7.8.0](https://artifacts.elastic.co/downloads/kibana/kibana-7.8.0-linux-x86_64.tar.gz)
+
+### Settings summary
+- Each VM is given 1G RAM.
+- Elasticsearch is configured (in `jvm.options`) with a 512M heap - [50% available RAM](https://www.elastic.co/guide/en/elasticsearch/reference/current/heap-size.html).
+- The number of file descriptors [is increased](https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html).
+- The number of threads [is increased](https://www.elastic.co/guide/en/elasticsearch/reference/current/max-number-of-threads.html).
+- The `mmap` count limit [is increased](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html).
+- [Disable swapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html#swappiness)
+
+### Running
+- Install VirtualBox
+- Install Vagrant
+- Clone this repository
+- Place the Elasticsearch and Kibana archives into the repository root
+- `cd` into the repo
+- Run `vagrant up`
+
+Without modifying `Vagrantfile`, Vagrant will spin up two VMs; one Elasticsearch node (`10.0.200.101`) and one instance of Kibana (`10.0.200.104`).
+
+To start Elasticsearch, you can `vagrant ssh node1` and run `elasticsearch-7.4.0/bin/elasticsearch`. 
+
+To start Kibana, you'll need to `vagrant ssh node4` and run `kibana-7.4.0/bin/kibana`. 
+
+If you need more nodes, you can uncomment the provisioners for `node2` and `node3`, then run `vagrant up` again. When you start Elasticsearch on those nodes, they'll automatically join the cluster and shard reallocation will begin.
+
+### Resetting
+If you've been using the environment and want/need to burn everything down and start from scratch, you can use `vagrant destroy`. This will delete the VMs so the next time you `vagrant up`, you'll get a brand new cluster.
+
+### Vagrant virtualbox guest additions issue
+```
+vagrant plugin install vagrant-vbguest
+vagrant vbguest --do install --no-cleanup
+```

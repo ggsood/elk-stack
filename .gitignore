@@ -7,3 +7,5 @@ site
 **/registry
 **/*dummy-passwords.txt
 **/.tfstate*
+**/vagrant
+**/install/*tar.gz
