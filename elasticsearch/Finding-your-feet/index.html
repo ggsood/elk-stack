@@ -11,14 +11,14 @@
         <meta name="author" content="Gaurav Sood">
       
       
-        <link rel="canonical" href="https://ggsood.github.io/elk-stack/Installation/install/">
+        <link rel="canonical" href="https://ggsood.github.io/elk-stack/elasticsearch/Finding-your-feet/">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
-        <title>Install - Elasticsearch and ELK Stack</title>
+        <title>Finding your feet - Elasticsearch and ELK Stack</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#going-via-tar" class="md-skip">
+        <a href="#finding-your-feet" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Install
+              Finding your feet
             
           </span>
         </div>
@@ -162,13 +162,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../elasticsearch/What-is-Elasticsearch/" class="md-tabs__link">
+      <a href="../What-is-Elasticsearch/" class="md-tabs__link md-tabs__link--active">
         Elasticsearch
       </a>
     </li>
@@ -227,12 +229,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Elasticsearch
@@ -253,7 +257,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../elasticsearch/What-is-Elasticsearch/" class="md-nav__link">
+    <a href="../What-is-Elasticsearch/" class="md-nav__link">
       What is Elasticsearch
     </a>
   </li>
@@ -264,11 +268,70 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../elasticsearch/Finding-your-feet/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Finding your feet
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Finding your feet
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index-some-documents" class="md-nav__link">
+    Index some documents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-searching" class="md-nav__link">
+    Start Searching
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analytics" class="md-nav__link">
+    Analytics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -279,7 +342,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../elasticsearch/Basic-Concepts/" class="md-nav__link">
+    <a href="../Basic-Concepts/" class="md-nav__link">
       Basic Concepts
     </a>
   </li>
@@ -292,7 +355,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../elasticsearch/Exploring-Cluster/" class="md-nav__link">
+    <a href="../Exploring-Cluster/" class="md-nav__link">
       Exloring Cluster
     </a>
   </li>
@@ -316,67 +379,90 @@
               
                 
                 
-                  <h1>Install</h1>
-                
-                <p>On CentOS 7 Machine, elastic version 6.2.4 as this installs xpack, in newer versions xpack is installed by default</p>
-<p>Install java </p>
-<p>yum install java-1.8.0-openjdk -y</p>
-<h2 id="going-via-tar">Going via tar</h2>
-<ol>
-<li>Start with adding a user elastic,  <code>sudo useradd elastic</code></li>
-<li>Increase security limits for the elastic user
-   In <code>/etc/security/limits.conf</code> add <code>elastic - nofile 65536</code></li>
-<li>Increase Memory Map limits
-   In <code>/etc/sysctl.conf</code> add <code>vm.max_map_count = 262144</code>
-   do <code>sysctl -p</code> to load system settings</li>
-<li>Download elasticsearch 
-   curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.4.tar.gz
-   tar -xzvf 
-   test - start elastic and check if its working
-   <div class="highlight"><pre><span></span><code>./bin/elasticsearch -d -p pid
-less logs/elasticsearch
-kill `cat pid`
-</code></pre></div></li>
-<li>
-<p>Download Kibana
-   curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-6.2.4-linux-x86_64.tar.gz</p>
-</li>
-<li>
-<p>Install x-pack
-   curl -L -O https://artifacts.elastic.co/downloads/packs/x-pack/x-pack-6.2.4.zip</p>
-<p><em>For Offline installation</em>
-   ./elasticsearch/bin/elasticsearch-plugin install file:///home/elastic/x-pack-6.2.4.zip</p>
-</li>
-<li>
-<p>Securing and Encryption</p>
-</li>
-</ol>
-<p>In master node ~/elasticsearch/config/certs</p>
-<p>~/elasticsearch/bin/x-pack/certutil ca
-<em>passowod=a</em>
-~/elasticsearch/bin/x-pack/certutil cert --ca elastic-stack-ca.p12 --name master --dns gsood1c.mylabserver.com --ip 172.31.22.182
-~/elasticsearch/bin/x-pack/certutil cert --ca elastic-stack-ca.p12 --name data1 --dns gsood2c.mylabserver.com --ip 172.31.31.49
-~/elasticsearch/bin/x-pack/certutil cert --ca elastic-stack-ca.p12 --name data2 --dns gsood3c.mylabserver.com --ip 172.31.22.21</p>
-<p>In other nodes copy
-scp data1.p12 elastic@172.31.31.49:/home/elastic/
-<div class="highlight"><pre><span></span><code>~/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-~/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-~/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-~/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.truststore.secure_password
+                <h1 id="finding-your-feet"><strong>Finding your feet</strong></h1>
+<hr />
+<p>Lets start with a simple tutorial covering basics concepts like indexing, search and aggregations.
+We will cover more on them in next sections.</p>
+<p>Have a running instance of Elasticsearch running, single node cluster will be good to follow along. </p>
+<p>For details on the different installations you can refer this <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-install.html">getting-started-install</a>.</p>
+<p>For keeping things simple we will use docker to run the elasticsearch node and later on use docker-compose to have a working ELK Stack.</p>
+<p>To start a single-node ES cluster for development or testing</p>
+<div class="highlight"><pre><span></span><code>docker run -p <span class="m">9200</span>:9200 -p <span class="m">9300</span>:9300 <span class="se">\</span>
+        -e <span class="s2">&quot;discovery.type=single-node&quot;</span> <span class="se">\</span>
+        docker.elastic.co/elasticsearch/elasticsearch:7.10.1
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>xpack.security.enabled: true
-xpack.security.transport.ssl.enabled: true
-xpack.security.transport.ssl.verification_mode: full
-xpack.security.transport.ssl.keystore.path: certs/master.p12
-xpack.security.transport.ssl.truststore.path: certs/master.p12
-xpack.security.http.ssl.enabled: true
-xpack.security.http.ssl.keystore.path: certs/master.p12
-xpack.security.http.ssl.truststore.path: certs/master.p12
+<h2 id="index-some-documents"><em>Index some documents</em></h2>
+<div class="highlight"><pre><span></span><code>PUT /customer/_doc/1
+<span class="o">{</span>
+  <span class="s2">&quot;name&quot;</span>: <span class="s2">&quot;John Doe&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>This request automatically creates the customer index if it doesn’t already exist, adds a new document that has an ID of 1, and stores and indexes the name field.</p>
+<p>The new document is available immediately from any node in the cluster. You can retrieve it with a GET request that specifies its document ID.
+<div class="highlight"><pre><span></span><code>GET /customer/_doc/1
+</code></pre></div>
+You can also load documents in bulk by following steps-</p>
+<ol>
+<li>Download the <a href="https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json?raw=true">accounts.json</a> sample data set.</li>
+<li>Index the account data into the bank index with the following _bulk request:
+<div class="highlight"><pre><span></span><code><span class="c1">## Load the bulk json</span>
+curl -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+    -XPOST <span class="s2">&quot;localhost:9200/bank/_bulk?pretty&amp;refresh&quot;</span> <span class="se">\</span>
+    --data-binary <span class="s2">&quot;@accounts.json&quot;</span>
 
-## same in other  nodes  with correct keystore
+<span class="c1">## check the new index with the documents</span>
+curl <span class="s2">&quot;localhost:9200/_cat/indices?v&quot;</span>
+</code></pre></div>
+The response indicates that 1,000 documents were indexed successfully.</li>
+</ol>
+<h2 id="start-searching"><em>Start Searching</em></h2>
+<p>Once you have ingested some data into an Elasticsearch index, you can search it by sending requests to the <em>_search</em> endpoint. 
+- To access the full suite of search capabilities, you use the Elasticsearch Query DSL to specify the search criteria in the request body. We will discuss more on this in the later sections.
+- You can specify the name of the index you want to search in the request URI.</p>
+<div class="highlight"><pre><span></span><code>GET /bank/_search
+<span class="o">{</span>
+  <span class="s2">&quot;query&quot;</span>: <span class="o">{</span> <span class="s2">&quot;match_all&quot;</span>: <span class="o">{}</span> <span class="o">}</span>,
+  <span class="s2">&quot;sort&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span> <span class="s2">&quot;account_number&quot;</span>: <span class="s2">&quot;asc&quot;</span> <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Each search request is <strong>self-contained</strong>: meaning Elasticsearch does not maintain any state information across requests, so every request you fire will be a new request all together.</p>
+<p>To page through the search hits, specify the from and size parameters in your request.
+For example, the following request gets hits 10 through 19:
+<div class="highlight"><pre><span></span><code>GET /bank/_search
+<span class="o">{</span>
+  <span class="s2">&quot;query&quot;</span>: <span class="o">{</span> <span class="s2">&quot;match_all&quot;</span>: <span class="o">{}</span> <span class="o">}</span>,
+  <span class="s2">&quot;sort&quot;</span>: <span class="o">[</span>
+    <span class="o">{</span> <span class="s2">&quot;account_number&quot;</span>: <span class="s2">&quot;asc&quot;</span> <span class="o">}</span>
+  <span class="o">]</span>,
+  <span class="s2">&quot;from&quot;</span>: <span class="m">10</span>,
+  <span class="s2">&quot;size&quot;</span>: <span class="m">10</span>
+<span class="o">}</span>
 </code></pre></div></p>
-<p>In Kibana</p>
-<p>~/kibana/bin/kibana-plugin install file:///home/elastic/x-pack-6.2.4.zip</p>
+<p><strong>Full-Text Search</strong> - the following request only matches addresses that contain the phrase <code>mill lane</code> 
+<div class="highlight"><pre><span></span><code>GET /bank/_search
+<span class="o">{</span>
+  <span class="s2">&quot;query&quot;</span>: <span class="o">{</span> <span class="s2">&quot;match_phrase&quot;</span>: <span class="o">{</span> <span class="s2">&quot;address&quot;</span>: <span class="s2">&quot;mill lane&quot;</span> <span class="o">}</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></p>
+<h2 id="analytics"><em>Analytics</em></h2>
+<p>Elasticsearch aggregations enable you to get meta-information about your search results and answer questions like, "How many account holders are in Texas?" or "What’s the average balance of accounts in Tennessee?" </p>
+<p>You can search documents, filter hits, and use aggregations to analyze the results all in one request.
+<div class="highlight"><pre><span></span><code>GET /bank/_search
+<span class="o">{</span>
+  <span class="s2">&quot;size&quot;</span>: <span class="m">0</span>,
+  <span class="s2">&quot;aggs&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;group_by_state&quot;</span>: <span class="o">{</span>
+      <span class="s2">&quot;terms&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;field&quot;</span>: <span class="s2">&quot;state.keyword&quot;</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></p>
+<h2 id="next-steps"><strong>Next Steps</strong></h2>
+<p>Now that you’ve set up a cluster, indexed some documents, and run some searches and aggregations, time to dig inside elasticsearch more.</p>
                 
               
               

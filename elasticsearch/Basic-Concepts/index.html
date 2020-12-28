@@ -1,32 +1,531 @@
-<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link href=https://ggsood.github.io/elk-stack/elasticsearch/Basic-Concepts/ rel=canonical><meta name=author content="Gaurav Sood"><link rel="shortcut icon" href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.1, mkdocs-material-5.2.2"><title>Basic Concepts - Elasticsearch and ELK Stack</title><link rel=stylesheet href=../../assets/stylesheets/main.a2408e81.min.css><link href=https://fonts.gstatic.com rel=preconnect crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback"><style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style></head> <body dir=ltr> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#elasticsearch-basic-concepts-and-terms class=md-skip> Skip to content </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header-nav md-grid" aria-label=Header> <a href=https://ggsood.github.io/elk-stack title="Elasticsearch and ELK Stack" class="md-header-nav__button md-logo" aria-label="Elasticsearch and ELK Stack"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg> </a> <label class="md-header-nav__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg> </label> <div class=md-header-nav__title data-md-component=header-title> <div class=md-header-nav__ellipsis> <span class="md-header-nav__topic md-ellipsis"> Elasticsearch and ELK Stack </span> <span class="md-header-nav__topic md-ellipsis"> Basic Concepts </span> </div> </div> <label class="md-header-nav__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query data-md-state=active> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </label> <button type=reset class="md-search__icon md-icon" aria-label=Clear data-md-component=search-reset tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> </form> <div class=md-search__output> <div class=md-search__scrollwrap data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list></ol> </div> </div> </div> </div> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class="md-tabs md-tabs--active" aria-label=Tabs data-md-component=tabs> <div class="md-tabs__inner md-grid"> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../.. class=md-tabs__link> Welcome </a> </li> <li class=md-tabs__item> <a href=../YouKnowForSearch/ class="md-tabs__link md-tabs__link--active"> Elasticsearch </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=https://ggsood.github.io/elk-stack title="Elasticsearch and ELK Stack" class="md-nav__button md-logo" aria-label="Elasticsearch and ELK Stack"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg> </a> Elasticsearch and ELK Stack </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. title=Welcome class=md-nav__link> Welcome </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=nav-2 type=checkbox id=nav-2 checked> <label class=md-nav__link for=nav-2> Elasticsearch <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg> </span> </label> <nav class=md-nav aria-label=Elasticsearch data-md-level=1> <label class=md-nav__title for=nav-2> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> Elasticsearch </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../YouKnowForSearch/ title="You Know for Search" class=md-nav__link> You Know for Search </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" data-md-toggle=toc type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> Basic Concepts <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg> </span> </label> <a href=./ title="Basic Concepts" class="md-nav__link md-nav__link--active"> Basic Concepts </a> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> Table of contents </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=#near-real-time class=md-nav__link> Near Real Time </a> <nav class=md-nav aria-label="Near Real Time"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#cluster class=md-nav__link> Cluster </a> </li> <li class=md-nav__item> <a href=#node class=md-nav__link> Node </a> </li> <li class=md-nav__item> <a href=#index class=md-nav__link> Index </a> </li> <li class=md-nav__item> <a href=#type-depreceated class=md-nav__link> Type - Depreceated </a> </li> <li class=md-nav__item> <a href=#document- class=md-nav__link> Document - </a> </li> <li class=md-nav__item> <a href=#shards-and-replicas- class=md-nav__link> Shards and Replicas - </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../Exploring-Cluster/ title="Exloring Cluster" class=md-nav__link> Exloring Cluster </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label="Table of contents"> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> Table of contents </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=#near-real-time class=md-nav__link> Near Real Time </a> <nav class=md-nav aria-label="Near Real Time"> <ul class=md-nav__list> <li class=md-nav__item> <a href=#cluster class=md-nav__link> Cluster </a> </li> <li class=md-nav__item> <a href=#node class=md-nav__link> Node </a> </li> <li class=md-nav__item> <a href=#index class=md-nav__link> Index </a> </li> <li class=md-nav__item> <a href=#type-depreceated class=md-nav__link> Type - Depreceated </a> </li> <li class=md-nav__item> <a href=#document- class=md-nav__link> Document - </a> </li> <li class=md-nav__item> <a href=#shards-and-replicas- class=md-nav__link> Shards and Replicas - </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class=md-content> <article class="md-content__inner md-typeset"> <h1 id=elasticsearch-basic-concepts-and-terms>Elasticsearch Basic Concepts and Terms</h1> <hr> <h2 id=near-real-time>Near Real Time</h2> <p>Elasticsearch is a near-realtime search platform. What this means is there is a <strong>slight latency</strong> (normally one second) from the time you index a document until the time it becomes searchable.</p> <h3 id=cluster>Cluster</h3> <ul> <li>A cluster is a collection of one or more nodes (servers) that together holds your entire data and provides federated indexing and search capabilities across all nodes. </li> <li> <p>A cluster is identified by a unique name which by default is "elasticsearch". This name is important because a node can only be part of a cluster if the node is set up to join the cluster by its name.</p> </li> <li> <p>Make sure that you don’t reuse the same cluster names in different environments, otherwise you might end up with nodes joining the wrong cluster.</p> </li> <li> <p>For instance you could use logging-dev, logging-stage, and logging-prod for the development, staging, and production clusters.</p> </li> </ul> <h3 id=node>Node</h3> <ul> <li>A node is a single server that is part of your cluster, stores your data, and participates in the cluster’s indexing and search capabilities. </li> <li>Just like a cluster, a node is identified by a name which by default is a random Universally Unique IDentifier (UUID) that is assigned to the node at startup. </li> <li>You can define any node name you want if you do not want the default. </li> <li>This name is important for administration purposes where you want to identify which servers in your network correspond to which nodes in your Elasticsearch cluster.</li> </ul> <p><em>A node can be configured to join a specific cluster by the cluster name. By default, each node is set up to join a cluster named elasticsearch which means that if you start up a number of nodes on your network and—assuming they can discover each other—they will all automatically form and join a single cluster named elasticsearch.</em></p> <h3 id=index>Index</h3> <p>An index is a collection of documents that have somewhat similar characteristics. An index is identified by a name (that must be all lowercase) and this name is used to refer to the index when performing indexing, search, update, and delete operations against the documents in it.</p> <h3 id=type-depreceated>Type - Depreceated</h3> <p>A type used to be a logical category/partition of your index to allow you to store different types of documents in the same index, e.g. one type for users, another type for blog posts.</p> <p><strong>Reason -</strong> fields that have the same name in different mapping types are backed by the same Lucene field internally. This can lead to frustration when, for example, you want deleted to be a date field in one type and a boolean field in another type in the same index. On top of that, storing different entities that have few or no fields in common in the same index leads to sparse data and interferes with Lucene’s ability to compress documents efficiently.</p> <p>Alternatives- 1. index per document type This approach has two benefits:</p> <p>Data is more likely to be dense and so benefit from compression techniques used in Lucene. The term statistics used for scoring in full text search are more likely to be accurate because all documents in the same index represent a single entity.</p> <ol> <li>custom type</li> </ol> <div class=codehilite><pre><span></span><code><span class=n>PUT</span> <span class=n>twitter</span>
-<span class=err>{</span>
-  <span class=ss>&quot;mappings&quot;</span><span class=p>:</span> <span class=err>{</span>
-    <span class=ss>&quot;_doc&quot;</span><span class=p>:</span> <span class=err>{</span>
-      <span class=ss>&quot;properties&quot;</span><span class=p>:</span> <span class=err>{</span>
-        <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=err>{</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;keyword&quot;</span> <span class=err>}</span><span class=p>,</span> 
-        <span class=ss>&quot;name&quot;</span><span class=p>:</span> <span class=err>{</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;text&quot;</span> <span class=err>}</span><span class=p>,</span>
-        <span class=ss>&quot;user_name&quot;</span><span class=p>:</span> <span class=err>{</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;keyword&quot;</span> <span class=err>}</span><span class=p>,</span>
-        <span class=ss>&quot;email&quot;</span><span class=p>:</span> <span class=err>{</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;keyword&quot;</span> <span class=err>}</span><span class=p>,</span>
-        <span class=ss>&quot;content&quot;</span><span class=p>:</span> <span class=err>{</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;text&quot;</span> <span class=err>}</span><span class=p>,</span>
-        <span class=ss>&quot;tweeted_at&quot;</span><span class=p>:</span> <span class=err>{</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;date&quot;</span> <span class=err>}</span>
-      <span class=err>}</span>
-    <span class=err>}</span>
-  <span class=err>}</span>
-<span class=err>}</span>
 
-<span class=n>The</span> <span class=n>explicit</span> <span class=k>type</span> <span class=n>field</span> <span class=n>takes</span> <span class=n>the</span> <span class=n>place</span> <span class=k>of</span> <span class=n>the</span> <span class=k>implicit</span> <span class=n>_type</span> <span class=n>field</span><span class=p>.</span>
-<span class=n>Based</span> <span class=k>on</span> <span class=n>your</span> <span class=k>search</span>
-<span class=ss>&quot;filter&quot;</span><span class=p>:</span> <span class=err>{</span>
-    <span class=ss>&quot;match&quot;</span><span class=p>:</span> <span class=err>{</span>
-        <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;tweet&quot;</span>  <span class=k>or</span> <span class=ss>&quot;type&quot;</span><span class=p>:</span> <span class=ss>&quot;user&quot;</span>
-    <span class=err>}</span>
-<span class=err>}</span>
-</code></pre></div> <p>Refer - https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html</p> <h3 id=document->Document -</h3> <ul> <li>A document is a basic unit of information that can be indexed.</li> <li>This document is expressed in JSON (JavaScript Object Notation) which is a ubiquitous internet data interchange format.</li> </ul> <h3 id=shards-and-replicas->Shards and Replicas -</h3> <p><em>Subdivide your index into multiple pieces called shards.</em></p> <p>When you create an index, you can simply define the number of shards that you want. Each shard is in itself a fully-functional and independent "index" that can be hosted on any node in the cluster.</p> <p>Sharding is important for two primary reasons:</p> <ol> <li>It allows you to horizontally split/scale your content volume</li> <li>It allows you to distribute and parallelize operations across shards (potentially on multiple nodes) thus increasing performance/throughput.</li> </ol> <p><em>Elasticsearch allows you to make one or more copies of your index’s shards into what are called replica shards, or replicas for short.</em></p> <p>Replication is important for two primary reasons:</p> <ol> <li>It provides high availability in case a shard/node fails. For this reason, it is important to note that a replica shard is never allocated on the same node as the original/primary shard that it was copied from.</li> <li>It allows you to scale out your search volume/throughput since searches can be executed on all replicas in parallel.</li> </ol> <p>The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may also change the number of replicas dynamically anytime.</p> <p><strong>You can change the number of shards for an existing index using the _shrink and _split APIs, however this is not a trivial task and pre-planning for the correct number of shards is the optimal approach.</strong></p> <p><em>Each Elasticsearch shard is a Lucene index. There is a maximum number of documents you can have in a single Lucene index. As of LUCENE-5843, the limit is 2,147,483,519 (= Integer.MAX_VALUE - 128) documents. You can monitor shard sizes using the _cat/shards API.</em></p> </article> </div> </div> </main> <footer class=md-footer> <div class=md-footer-nav> <nav class="md-footer-nav__inner md-grid" aria-label=Footer> <a href=../YouKnowForSearch/ title="You Know for Search" class="md-footer-nav__link md-footer-nav__link--prev" rel=prev> <div class="md-footer-nav__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer-nav__title> <div class=md-ellipsis> <span class=md-footer-nav__direction> Previous </span> You Know for Search </div> </div> </a> <a href=../Exploring-Cluster/ title="Exloring Cluster" class="md-footer-nav__link md-footer-nav__link--next" rel=next> <div class=md-footer-nav__title> <div class=md-ellipsis> <span class=md-footer-nav__direction> Next </span> Exloring Cluster </div> </div> <div class="md-footer-nav__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> </div> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 Gaurav Sood </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <script src=../../assets/javascripts/vendor.d710d30a.min.js></script> <script src=../../assets/javascripts/bundle.5f27aba8.min.js></script><script id=__lang type=application/json>{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script> <script>
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Gaurav Sood">
+      
+      
+        <link rel="canonical" href="https://ggsood.github.io/elk-stack/elasticsearch/Basic-Concepts/">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+    
+    
+      
+        <title>Basic Concepts - Elasticsearch and ELK Stack</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3b61ea93.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Fira Code",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#elasticsearch-basic-concepts-and-terms" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://ggsood.github.io/elk-stack" title="Elasticsearch and ELK Stack" class="md-header-nav__button md-logo" aria-label="Elasticsearch and ELK Stack">
+      
+  <img src="../../assets/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Elasticsearch and ELK Stack
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Basic Concepts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Welcome
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../What-is-Elasticsearch/" class="md-tabs__link md-tabs__link--active">
+        Elasticsearch
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://ggsood.github.io/elk-stack" title="Elasticsearch and ELK Stack" class="md-nav__button md-logo" aria-label="Elasticsearch and ELK Stack">
+      
+  <img src="../../assets/images/favicon.ico" alt="logo">
+
+    </a>
+    Elasticsearch and ELK Stack
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  
+
+
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Elasticsearch
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Elasticsearch" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Elasticsearch
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../What-is-Elasticsearch/" class="md-nav__link">
+      What is Elasticsearch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../Finding-your-feet/" class="md-nav__link">
+      Finding your feet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Basic Concepts
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Basic Concepts
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#near-real-time" class="md-nav__link">
+    Near Real Time
+  </a>
+  
+    <nav class="md-nav" aria-label="Near Real Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cluster" class="md-nav__link">
+    Cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    Node
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    Index
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-depreceated" class="md-nav__link">
+    Type - Depreceated
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document-" class="md-nav__link">
+    Document -
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shards-and-replicas-" class="md-nav__link">
+    Shards and Replicas -
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../Exploring-Cluster/" class="md-nav__link">
+      Exloring Cluster
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="elasticsearch-basic-concepts-and-terms">Elasticsearch Basic Concepts and Terms</h1>
+<hr />
+<h2 id="near-real-time">Near Real Time</h2>
+<p>Elasticsearch is a near-realtime search platform. What this means is there is a <strong>slight latency</strong> (normally one second) from the time you index a document until the time it becomes searchable.</p>
+<h3 id="cluster">Cluster</h3>
+<ul>
+<li>A cluster is a collection of one or more nodes (servers) that together holds your entire data and provides federated indexing and search capabilities across all nodes. </li>
+<li>
+<p>A cluster is identified by a unique name which by default is "elasticsearch". This name is important because a node can only be part of a cluster if the node is set up to join the cluster by its name.</p>
+</li>
+<li>
+<p>Make sure that you don’t reuse the same cluster names in different environments, otherwise you might end up with nodes joining the wrong cluster.</p>
+</li>
+<li>
+<p>For instance you could use logging-dev, logging-stage, and logging-prod for the development, staging, and production clusters.</p>
+</li>
+</ul>
+<h3 id="node">Node</h3>
+<ul>
+<li>A node is a single server that is part of your cluster, stores your data, and participates in the cluster’s indexing and search capabilities. </li>
+<li>Just like a cluster, a node is identified by a name which by default is a random Universally Unique IDentifier (UUID) that is assigned to the node at startup. </li>
+<li>You can define any node name you want if you do not want the default. </li>
+<li>This name is important for administration purposes where you want to identify which servers in your network correspond to which nodes in your Elasticsearch cluster.</li>
+</ul>
+<p><em>A node can be configured to join a specific cluster by the cluster name. By default, each node is set up to join a cluster named elasticsearch which means that if you start up a number of nodes on your network and—assuming they can discover each other—they will all automatically form and join a single cluster named elasticsearch.</em></p>
+<h3 id="index">Index</h3>
+<p>An index is a collection of documents that have somewhat similar characteristics.
+An index is identified by a name (that must be all lowercase) and this name is used to refer to the index when performing indexing, search, update, and delete operations against the documents in it.</p>
+<h3 id="type-depreceated">Type - Depreceated</h3>
+<p>A type used to be a logical category/partition of your index to allow you to store different types of documents in the same index, e.g. one type for users, another type for blog posts.</p>
+<p><strong>Reason -</strong> fields that have the same name in different mapping types are backed by the same Lucene field internally.
+This can lead to frustration when, for example, you want deleted to be a date field in one type and a boolean field in another type in the same index.
+On top of that, storing different entities that have few or no fields in common in the same index leads to sparse data and interferes with Lucene’s ability to compress documents efficiently.</p>
+<p>Alternatives- 
+1. index per document type
+This approach has two benefits:</p>
+<p>Data is more likely to be dense and so benefit from compression techniques used in Lucene.
+The term statistics used for scoring in full text search are more likely to be accurate because all documents in the same index represent a single entity.</p>
+<ol>
+<li>custom type</li>
+</ol>
+<div class="highlight"><pre><span></span><code>PUT twitter
+{
+  &quot;mappings&quot;: {
+    &quot;_doc&quot;: {
+      &quot;properties&quot;: {
+        &quot;type&quot;: { &quot;type&quot;: &quot;keyword&quot; }, 
+        &quot;name&quot;: { &quot;type&quot;: &quot;text&quot; },
+        &quot;user_name&quot;: { &quot;type&quot;: &quot;keyword&quot; },
+        &quot;email&quot;: { &quot;type&quot;: &quot;keyword&quot; },
+        &quot;content&quot;: { &quot;type&quot;: &quot;text&quot; },
+        &quot;tweeted_at&quot;: { &quot;type&quot;: &quot;date&quot; }
+      }
+    }
+  }
+}
+
+The explicit type field takes the place of the implicit _type field.
+Based on your search
+&quot;filter&quot;: {
+    &quot;match&quot;: {
+        &quot;type&quot;: &quot;tweet&quot;  or &quot;type&quot;: &quot;user&quot;
+    }
+}
+</code></pre></div>
+<p>Refer - https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html</p>
+<h3 id="document-">Document -</h3>
+<ul>
+<li>A document is a basic unit of information that can be indexed.</li>
+<li>This document is expressed in JSON (JavaScript Object Notation) which is a ubiquitous internet data interchange format.</li>
+</ul>
+<h3 id="shards-and-replicas-">Shards and Replicas -</h3>
+<p><em>Subdivide your index into multiple pieces called shards.</em></p>
+<p>When you create an index, you can simply define the number of shards that you want. Each shard is in itself a fully-functional and independent "index" that can be hosted on any node in the cluster.</p>
+<p>Sharding is important for two primary reasons:</p>
+<ol>
+<li>It allows you to horizontally split/scale your content volume</li>
+<li>It allows you to distribute and parallelize operations across shards (potentially on multiple nodes) thus increasing performance/throughput.</li>
+</ol>
+<p><em>Elasticsearch allows you to make one or more copies of your index’s shards into what are called replica shards, or replicas for short.</em></p>
+<p>Replication is important for two primary reasons:</p>
+<ol>
+<li>It provides high availability in case a shard/node fails. For this reason, it is important to note that a replica shard is never allocated on the same node as the original/primary shard that it was copied from.</li>
+<li>It allows you to scale out your search volume/throughput since searches can be executed on all replicas in parallel.</li>
+</ol>
+<p>The number of shards and replicas can be defined per index at the time the index is created.
+After the index is created, you may also change the number of replicas dynamically anytime.</p>
+<p><strong>You can change the number of shards for an existing index using the _shrink and _split APIs, however this is not a trivial task and pre-planning for the correct number of shards is the optimal approach.</strong></p>
+<p><em>Each Elasticsearch shard is a Lucene index. There is a maximum number of documents you can have in a single Lucene index. As of LUCENE-5843, the limit is 2,147,483,519 (= Integer.MAX_VALUE - 128) documents. You can monitor shard sizes using the _cat/shards API.</em></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer"></footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "../..",
-          features: ["tabs"],
+          features: ['navigation.tabs', 'navigation.sections', 'toc.integrate'],
           search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.27c6a5e6.min.js"
+            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
-      </script> </body> </html>
+      </script>
+      
+        <script src="../../search/main.js"></script>
+      
+    
+  </body>
+</html>
