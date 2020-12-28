@@ -9,3 +9,5 @@ site
 **/.tfstate*
 **/vagrant
 **/install/*tar.gz
+accounts.json
+test.es
