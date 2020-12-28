@@ -6,26 +6,39 @@ site_author: Gaurav Sood
 copyright: 'Copyright &copy; 2020 Gaurav Sood'
 
 theme:
-  name: 'material'
+  name: material
+  favicon: assets/images/favicon.ico
+  logo: assets/images/favicon.ico
+  custom_dir: overrides
+  include_search_page: false
+  search_index_only: false
+  palette:
+    scheme: default
+    primary: blue
+    accent: light blue
+  font:
+    text: Fira Code
+    code: Roboto Mono
   features:
-    - tabs
-  # favicon: images/favicon.png
-
-
-# Plugins
-plugins:
-  - search
-  - minify:
-      minify_html: true
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
 
 markdown_extensions:
   - codehilite
+  - admonition
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.details
+  - pymdownx.superfences
 
 # Page tree
 nav:
   - Welcome: index.md
   - Elasticsearch:
-    - You Know for Search: elasticsearch/YouKnowForSearch.md
+    - What is Elasticsearch: elasticsearch/What-is-Elasticsearch.md
+    - Finding your feet: elasticsearch/Finding-your-feet.md
     - Basic Concepts: elasticsearch/Basic-Concepts.md
     - Exloring Cluster: elasticsearch/Exploring-Cluster.md
 
