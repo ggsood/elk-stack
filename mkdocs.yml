@@ -32,6 +32,10 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tasklist:
+      clickable_checkbox: false
+      custom_checkbox: true
+
 
 # Page tree
 nav:
@@ -40,5 +44,10 @@ nav:
     - What is Elasticsearch: elasticsearch/What-is-Elasticsearch.md
     - Finding your feet: elasticsearch/Finding-your-feet.md
     - Basic Concepts: elasticsearch/Basic-Concepts.md
-    - Exloring Cluster: elasticsearch/Exploring-Cluster.md
+    - Exploring Cluster: elasticsearch/Exploring-Cluster.md
+  - ES Certification:
+    - Overview: elasticsearch-certification/Readme.md
+    - Installation and Configuration:
+      - Outline: elasticsearch-certification/01-Installation-and-Configuration/Outline.md
+      - Deploying ES Cluster: elasticsearch-certification/01-Installation-and-Configuration/Deploying-ES-Cluster.md
 

@@ -11,3 +11,4 @@ site
 **/install/*tar.gz
 accounts.json
 test.es
+ssh_config
