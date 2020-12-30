@@ -11,21 +11,21 @@
         <meta name="author" content="Gaurav Sood">
       
       
-        <link rel="canonical" href="https://ggsood.github.io/elk-stack/elasticsearch/Exploring-Cluster/">
+        <link rel="canonical" href="https://ggsood.github.io/elk-stack/elasticsearch-certification/01-Installation-and-Configuration/RBAC-in-ES/">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
-        <title>Exploring Cluster - Elasticsearch and ELK Stack</title>
+        <title>Define Role-Based Access Control Using Elasticsearch Security - Elasticsearch and ELK Stack</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.3b61ea93.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3b61ea93.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.39b8e14a.min.css">
         
           
           
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cluster-health" class="md-skip">
+        <a href="#define-role-based-access-control-using-elasticsearch-security" class="md-skip">
           Skip to content
         </a>
       
@@ -81,7 +81,7 @@
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href="https://ggsood.github.io/elk-stack" title="Elasticsearch and ELK Stack" class="md-header-nav__button md-logo" aria-label="Elasticsearch and ELK Stack">
       
-  <img src="../../assets/images/favicon.ico" alt="logo">
+  <img src="../../../assets/images/favicon.ico" alt="logo">
 
     </a>
     <label class="md-header-nav__button md-icon" for="__drawer">
@@ -97,7 +97,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Exploring Cluster
+              Define Role-Based Access Control Using Elasticsearch Security
             
           </span>
         </div>
@@ -153,7 +153,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../.." class="md-tabs__link">
+    <a href="../../.." class="md-tabs__link">
       Welcome
     </a>
   </li>
@@ -162,15 +162,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../What-is-Elasticsearch/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../../elasticsearch/What-is-Elasticsearch/" class="md-tabs__link">
         Elasticsearch
       </a>
     </li>
@@ -186,7 +184,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../elasticsearch-certification/Readme/" class="md-tabs__link">
+      <a href="../../Readme/" class="md-tabs__link">
         ES Certification
       </a>
     </li>
@@ -219,7 +217,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="https://ggsood.github.io/elk-stack" title="Elasticsearch and ELK Stack" class="md-nav__button md-logo" aria-label="Elasticsearch and ELK Stack">
       
-  <img src="../../assets/images/favicon.ico" alt="logo">
+  <img src="../../../assets/images/favicon.ico" alt="logo">
 
     </a>
     Elasticsearch and ELK Stack
@@ -234,7 +232,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." class="md-nav__link">
+    <a href="../../.." class="md-nav__link">
       Welcome
     </a>
   </li>
@@ -245,14 +243,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
     
     <label class="md-nav__link" for="nav-2">
       Elasticsearch
@@ -273,7 +269,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../What-is-Elasticsearch/" class="md-nav__link">
+    <a href="../../../elasticsearch/What-is-Elasticsearch/" class="md-nav__link">
       What is Elasticsearch
     </a>
   </li>
@@ -286,7 +282,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../Finding-your-feet/" class="md-nav__link">
+    <a href="../../../elasticsearch/Finding-your-feet/" class="md-nav__link">
       Finding your feet
     </a>
   </li>
@@ -299,7 +295,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../Basic-Concepts/" class="md-nav__link">
+    <a href="../../../elasticsearch/Basic-Concepts/" class="md-nav__link">
       Basic Concepts
     </a>
   </li>
@@ -310,45 +306,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Exploring Cluster
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../../elasticsearch/Exploring-Cluster/" class="md-nav__link">
       Exploring Cluster
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#cluster-health" class="md-nav__link">
-    Cluster health
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -388,7 +350,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../elasticsearch-certification/Readme/" class="md-nav__link">
+    <a href="../../Readme/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -427,7 +389,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../elasticsearch-certification/01-Installation-and-Configuration/Outline/" class="md-nav__link">
+    <a href="../Outline/" class="md-nav__link">
       Outline
     </a>
   </li>
@@ -440,7 +402,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../elasticsearch-certification/01-Installation-and-Configuration/Deploying-ES-Cluster/" class="md-nav__link">
+    <a href="../Deploying-ES-Cluster/" class="md-nav__link">
       Deploying ES Cluster
     </a>
   </li>
@@ -469,28 +431,16 @@
               
                 
                 
-                  <h1>Exploring Cluster</h1>
-                
-                <h3 id="cluster-health">Cluster health</h3>
-<div class="highlight"><pre><span></span><code>GET /_cat/health?v
-
-pattern of how we access data in Elasticsearch. That pattern can be summarized as follows:
-
-&lt;HTTP Verb&gt; /&lt;Index&gt;/&lt;Type&gt;/&lt;ID&gt;
-</code></pre></div>
-<p>cluster health, we either get green, yellow, or red.</p>
-<p>Green - everything is good (cluster is fully functional)
-Yellow - all data is available but some replicas are not yet allocated (cluster is fully functional)
-Red - some data is not available for whatever reason (cluster is partially functional)</p>
-<p><em>Note: When a cluster is red, it will continue to serve search requests from the available shards but you will likely need to fix it ASAP since there are unassigned shards.</em></p>
-<p>Elasticsearch uses <strong><em>unicast network discovery</em></strong> by default to find other nodes on the same machine, it is possible that you could accidentally start up more than one node on your computer and have them all join a single cluster</p>
-<p>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery-zen.html</p>
-<p>https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-transport.html</p>
-<p>https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html</p>
-<p><strong>Cluster state updates</strong>
-The master node is the only node in a cluster that can make changes to the cluster state. The master node processes one cluster state update at a time, applies the required changes and publishes the updated cluster state to all the other nodes in the cluster. Each node receives the publish message, acknowledges it, but does not yet apply it. If the master does not receive acknowledgement from at least discovery.zen.minimum_master_nodes nodes within a certain time (controlled by the discovery.zen.commit_timeout setting and defaults to 30 seconds) the cluster state change is rejected.</p>
-<p>Once enough nodes have responded, the cluster state is committed and a message will be sent to all the nodes. The nodes then proceed to apply the new cluster state to their internal state. The master node waits for all nodes to respond, up to a timeout, before going ahead processing the next updates in the queue. The discovery.zen.publish_timeout is set by default to 30 seconds and is measured from the moment the publishing started. Both timeout settings can be changed dynamically through the cluster update settings api.
-https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html</p>
+                <h1 id="define-role-based-access-control-using-elasticsearch-security">Define Role-Based Access Control Using Elasticsearch Security</h1>
+<p>With Elasticsearch Security, you can create highly granular roles to permit or restrict access to specific indexes, documents, and fields. Follow along on the Linux Academy Cloud Playground servers as we demonstrate how to:</p>
+<ul>
+<li>Use Kibana's management UI to create roles and users</li>
+<li>Use Elasticsearch APIs to create roles and users</li>
+<li>Limit access to specific cluster permissions</li>
+<li>Limit access to specific indexes</li>
+<li>Only allow specific actions on indexes</li>
+<li>Create a user with a given set of roles</li>
+</ul>
                 
               
               
@@ -507,20 +457,20 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-s
       
     </div>
     
-      <script src="../../assets/javascripts/vendor.08c56446.min.js"></script>
-      <script src="../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
-          base: "../..",
+          base: "../../..",
           features: ['navigation.tabs', 'navigation.sections', 'toc.integrate'],
           search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
+            worker: "../../../assets/javascripts/worker/search.8c7e0a7e.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
       
-        <script src="../../search/main.js"></script>
+        <script src="../../../search/main.js"></script>
       
     
   </body>

@@ -1,0 +1,735 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Gaurav Sood">
+      
+      
+        <link rel="canonical" href="https://ggsood.github.io/elk-stack/elasticsearch-certification/01-Installation-and-Configuration/Deploying-ES-Cluster/">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+    
+    
+      
+        <title>Deploying ES Cluster - Elasticsearch and ELK Stack</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3b61ea93.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#2094f3">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Fira Code",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploying-an-es-cluster" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://ggsood.github.io/elk-stack" title="Elasticsearch and ELK Stack" class="md-header-nav__button md-logo" aria-label="Elasticsearch and ELK Stack">
+      
+  <img src="../../../assets/images/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Elasticsearch and ELK Stack
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Deploying ES Cluster
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Welcome
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../elasticsearch/What-is-Elasticsearch/" class="md-tabs__link">
+        Elasticsearch
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Readme/" class="md-tabs__link md-tabs__link--active">
+        ES Certification
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://ggsood.github.io/elk-stack" title="Elasticsearch and ELK Stack" class="md-nav__button md-logo" aria-label="Elasticsearch and ELK Stack">
+      
+  <img src="../../../assets/images/favicon.ico" alt="logo">
+
+    </a>
+    Elasticsearch and ELK Stack
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../.." class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+    
+    <label class="md-nav__link" for="nav-2">
+      Elasticsearch
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Elasticsearch" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Elasticsearch
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../elasticsearch/What-is-Elasticsearch/" class="md-nav__link">
+      What is Elasticsearch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../elasticsearch/Finding-your-feet/" class="md-nav__link">
+      Finding your feet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../elasticsearch/Basic-Concepts/" class="md-nav__link">
+      Basic Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../elasticsearch/Exploring-Cluster/" class="md-nav__link">
+      Exploring Cluster
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  
+
+
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      ES Certification
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="ES Certification" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        ES Certification
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../Readme/" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  
+    
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" checked>
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Installation and Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Installation and Configuration" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        <span class="md-nav__icon md-icon"></span>
+        Installation and Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../Outline/" class="md-nav__link">
+      Outline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Deploying ES Cluster
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Deploying ES Cluster
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-a-linux-system-for-elasticsearch" class="md-nav__link">
+    Prepare a Linux system for Elasticsearch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    Implementation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-elasticsearch-from-and-archive" class="md-nav__link">
+    Deploy Elasticsearch from and archive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-a-multi-node-cluster" class="md-nav__link">
+    Configure a multi-node cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-a-single-node-cluster" class="md-nav__link">
+    Configure a single-node cluster
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure a single-node cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-the-elasticsearch" class="md-nav__link">
+    Start the elasticsearch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-kibana" class="md-nav__link">
+    Install kibana
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-kibana" class="md-nav__link">
+    Start kibana
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="deploying-an-es-cluster">Deploying an ES Cluster</h1>
+<p>Topics covered here</p>
+<ul>
+<li>Prepare a Linux system for Elasticsearch</li>
+<li>Deploy Elasticsearch from and archive</li>
+<li>Configure a multi-node cluster<ul>
+<li>Add custom node attributes</li>
+<li>Bind Elasticsearch to specific addresses</li>
+<li>Configure node roles</li>
+<li>Name a cluster</li>
+<li>Name each node in a cluster</li>
+<li>Configure node discovery</li>
+</ul>
+</li>
+<li>Configure a single-node cluster</li>
+<li>Start Elasticsearch</li>
+<li>Deploy Kibana</li>
+<li>Configure Kibana</li>
+<li>Start Kibana</li>
+</ul>
+<h2 id="prepare-a-linux-system-for-elasticsearch">Prepare a Linux system for Elasticsearch</h2>
+<p>We will be deploying two ES cluster with the following specification</p>
+<p><strong>Cluster-1:</strong> total 3 nodes
+- 1 Master + Kibana Node
+- 2 Data Nodes</p>
+<p><strong>Cluster-2:</strong> total 1 nodes
+- 1 Master + Kibana Node</p>
+<p>Why two clusters, this is to demonstrate</p>
+<ol>
+<li>Cross Cluster search functionality</li>
+<li>Cross Cluster Replication</li>
+<li>Backups and Restore Operations</li>
+</ol>
+<h2 id="architecture">Architecture</h2>
+<p>The below will be the architecture of the cluster we will be creating.</p>
+<p><img alt="Elasticsearch-Cluster.png" src="../../../assets/images/Elasticsearch-Cluster.png" /></p>
+<h3 id="implementation">Implementation</h3>
+<p>For implementing the above architecture we will follow the following approaches:</p>
+<ol>
+<li>
+<p>Cloud Based VMs
+    Spin up 4 small nodes with 2g memory, do check u can ssh into each of the nodes. The</p>
+</li>
+<li>
+<p>Vagrant Based VMs
+    Will be covered in the next sections.</p>
+</li>
+</ol>
+<h2 id="deploy-elasticsearch-from-and-archive">Deploy Elasticsearch from and archive</h2>
+<ol>
+<li>create a user "elastic"</li>
+<li>Disabling the swap space</li>
+<li>file descriptors or file handles increased, "elastic - nofile 65536" &gt;&gt; add this to /etc/security/limits.conf</li>
+<li>Virtual memory increased, "vm.max_map_count = 262144" &gt;&gt; /etc/sysctl.conf</li>
+<li>Increase number of threads, "elastic - nproc 4096" &gt;&gt; add this to /etc/security/limits.conf</li>
+<li>Address space to unlimited [Part of Bootstrap check]</li>
+</ol>
+<p>Run the file with sudo privileges</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+useradd elastic
+swapoff -a
+
+<span class="c1"># sed to comment the swap partition in /etc/fstab and keep a backup</span>
+
+sed -i.bak -r <span class="s1">&#39;s/(.+ swap .+)/#\1/&#39;</span> /etc/fstab
+<span class="nb">echo</span> <span class="s2">&quot;elastic - nofile 65536&quot;</span> &gt;&gt; /etc/security/limits.conf
+<span class="nb">echo</span> <span class="s2">&quot;vm.max_map_count = 262144&quot;</span> &gt;&gt; /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">&quot;elastic - nproc 4096&quot;</span> &gt;&gt; /etc/security/limits.conf
+
+<span class="c1"># Refresh the sysctl</span>
+sysctl -p
+
+<span class="c1"># run the command as elastic user</span>
+sudo -u elastic -H sh -c <span class="s2">&quot;</span>
+<span class="s2">cd /home/elastic; </span>
+<span class="s2">curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.1-linux-x86_64.tar.gz;</span>
+<span class="s2">tar -xzf elasticsearch-7.2.1-linux-x86_64.tar.gz</span>
+<span class="s2">mv elasticsearch-7.2.1 elasticsearch</span>
+<span class="s2">rm -rf elasticsearch-7.2.1-linux-x86_64.tar.gz</span>
+<span class="s2">&quot;</span>
+</code></pre></div>
+<p>After having the installation, time to configure elasticsearch
+on each node, as per the architecture diagram.</p>
+<h2 id="configure-a-multi-node-cluster">Configure a multi-node cluster</h2>
+<p>Elasticsearch Config yaml to be copied as per the node.
+<strong>For cluster-1</strong>
+<div class="highlight"><pre><span></span><code># master node
+cluster.name: cluster-1
+node.name: master-1
+node.attr.zone: 1
+network.host: [_local_, _site_]
+cluster.initial_master_nodes: [&quot;master-1&quot;]
+node:
+  master: true
+  data: false
+  ingest: false
+
+# data node - 1
+cluster.name: cluster-1
+node.name: data-1
+node.attr.zone: 1
+node.attr.temp: hot
+network.host: [_local_, _site_]
+discovery.seed_hosts: [&quot;172.31.30.103&quot;] # tell the discovery hosts, private ip of master nodes
+cluster.initial_master_nodes: [&quot;master-1&quot;]
+node:
+  master: false
+  data: true
+  ingest: false
+
+# data node-2
+cluster.name: cluster-1
+node.name: data-2
+node.attr.zone: 1
+node.attr.temp: hot
+network.host: [_local_, _site_]
+discovery.seed_hosts: [&quot;172.31.30.103&quot;]  # tell the discovery hosts, private ip of master nodes
+cluster.initial_master_nodes: [&quot;master-1&quot;]
+node:
+  master: false
+  data: true
+  ingest: false
+</code></pre></div></p>
+<h2 id="configure-a-single-node-cluster">Configure a single-node cluster</h2>
+<p><strong>For cluster-2</strong>
+<div class="highlight"><pre><span></span><code># single node cluster
+cluster.name: cluster-2
+node.name: node-1
+node.attr.zone: 1
+network.host: [_local_, _site_]
+cluster.initial_master_nodes: [&quot;node-1&quot;]
+node:
+  master: true
+  data: true
+  ingest: true
+</code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Update jvm.options file with the correct memory
+settings, 1g is the default. </p>
+</div>
+<h3 id="start-the-elasticsearch">Start the elasticsearch</h3>
+<p>Run from the elasticsearch folder</p>
+<p><code>./bin/elasticsearch -d -p pid</code></p>
+<p>this will give u the process pid which u can use to kill the process.</p>
+<p>check the nodes are connected by checking logs or running the command 
+<code>curl http://localhost:9200/_cat/nodes?v</code></p>
+<h2 id="install-kibana">Install kibana</h2>
+<p>Run the following command on master-1 node</p>
+<div class="highlight"><pre><span></span><code>curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.2.1-linux-x86_64.tar.gz<span class="p">;</span>
+tar -xzf kibana-7.2.1-linux-x86_64.tar.gz
+</code></pre></div>
+<h2 id="start-kibana">Start kibana</h2>
+<p>From directory in which you installed kibana
+<code>./bin/kibana</code></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <footer class="md-footer"></footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ['navigation.tabs', 'navigation.sections', 'toc.integrate'],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.8c7e0a7e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="../../../search/main.js"></script>
+      
+    
+  </body>
+</html>
