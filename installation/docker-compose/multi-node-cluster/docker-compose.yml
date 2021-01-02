@@ -1,7 +1,7 @@
-version: '2.2'
+version: '3.8'
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.1
     container_name: es01
     environment:
       - node.name=es01
@@ -24,7 +24,7 @@ services:
     networks:
       - elastic
   es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.1
     container_name: es02
     environment:
       - node.name=es02
@@ -44,11 +44,11 @@ services:
     volumes:
       - data02:/usr/share/elasticsearch/data
     ports:
-      - 9201:9201
+      - 9201:9200
     networks:
       - elastic
   es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.1
     container_name: es03
     environment:
       - node.name=es03
@@ -66,13 +66,13 @@ services:
         soft: -1
         hard: -1
     ports:
-      - 9202:9202
+      - 9202:9200
     volumes:
       - data03:/usr/share/elasticsearch/data
     networks:
       - elastic
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.5.2
+    image: docker.elastic.co/kibana/kibana:7.2.1
     container_name: kibana
     environment:
       ELASTICSEARCH_URL: http://es01:9200

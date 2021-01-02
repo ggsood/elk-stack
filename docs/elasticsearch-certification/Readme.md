@@ -31,7 +31,7 @@ Elastic search version: 7.2
 - Apply fuzzy matching to a query
 - Define and use a search template
 - Write and execute a query that searches across multiple clusters
-- 
+ 
 **Aggregations**
 
 - Write and execute metric and bucket aggregations

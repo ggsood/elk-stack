@@ -9,6 +9,7 @@ site
 **/.tfstate*
 **/vagrant
 **/install/*tar.gz
-accounts.json
+*.json
 test.es
 ssh_config
+.venv
