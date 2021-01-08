@@ -155,6 +155,57 @@ node:
     Update jvm.options file with the correct memory
     settings, 1g is the default. 
 
+!!! do check
+    For enabling remote read at Cluster 2 from cluster 1
+```yaml
+cluster.name: cluster-2
+node.name: node-1
+node.attr.zone: 1
+network.host: [_local_, _site_]
+cluster.initial_master_nodes: ["node-1"]
+node:
+  master: true
+  data: true
+  ingest: true
+
+# private ips of the nodes
+reindex.remote.whitelist: "172.31.30.103:9200, 172.31.16.127:9200, 172.31.20.209:9200"
+
+# ssl certificate information, same here as we used the same CA
+reindex.ssl:
+  verification_mode: certificate
+  truststore:
+    type: PKCS12
+    path: certs/node-1
+  keystore:
+    type: PKCS12
+    path: certs/node-1
+
+xpack.security:
+  enabled: true
+  transport:
+    ssl:
+      enabled: true
+      verification_mode: certificate
+      keystore:
+        path: certs/node-1
+      truststore:
+        path: certs/node-1
+  http:
+    ssl:
+      enabled: true
+      verification_mode: certificate
+      keystore:
+        path: certs/node-1
+      truststore:
+        path: certs/node-1
+```
+
+Add the secure_password the same way
+```
+  echo "elastic" | /home/elastic/elasticsearch/bin/elasticsearch-keystore add --stdin reindex.ssl.keystore.secure_password
+  echo "elastic" | /home/elastic/elasticsearch/bin/elasticsearch-keystore add --stdin reindex.ssl.truststore.secure_password
+```
 
 ### Start the elasticsearch 
 

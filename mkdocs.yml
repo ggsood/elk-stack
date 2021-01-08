@@ -9,7 +9,7 @@ theme:
   name: material
   favicon: assets/images/favicon.ico
   logo: assets/images/favicon.ico
-  custom_dir: overrides
+  custom_dir: docs/overrides
   include_search_page: false
   search_index_only: false
   palette:

@@ -7,7 +7,7 @@ services:
       - node.name=es01
       - node.master=true
       - node.data=false
-      - node.ingest=false
+      - node.ingest=true
       - node.ml=false
       - cluster.name=es-docker-cluster
       - cluster.initial_master_nodes=es01
@@ -30,7 +30,7 @@ services:
       - node.name=es02
       - node.master=false
       - node.data=true
-      - node.ingest=false
+      - node.ingest=true
       - node.ml=false
       - cluster.name=es-docker-cluster
       - discovery.seed_hosts=es01
