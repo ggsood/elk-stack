@@ -13,3 +13,4 @@ site
 test.es
 ssh_config
 .venv
+reference/**.git

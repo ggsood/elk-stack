@@ -32,3 +32,7 @@ https://github.com/glenacota/elastic-training-repo
 https://volkanpaksoy.com/archive/2019/07/05/ElasticSearch-Workout/
 
 https://github.com/zyongqing/elastic-certified-engineer/blob/master/dockerfiles/backup_and_recovery.yml
+
+### Important
+
+https://medium.com/kreuzwerker-gmbh/exercises-for-the-elastic-certified-engineer-exam-deploy-and-operate-a-cluster-b06741760d47
